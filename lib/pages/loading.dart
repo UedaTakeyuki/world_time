@@ -9,20 +9,31 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
 
-  void getData() async {
+  void getTime() async {
 
-    Response response = await get('https://jsonplaceholder.typicode.com/todos/1');
+    // make the request
+    Response response = await get('http://worldtimeapi.org/api/timezone/Europe/London');
     Map data = jsonDecode(response.body);
-    print(data);
-    print(data['title']);
-//     print(data.userId); // Error: The getter 'userId' isn't defined
+    //print(data);
+
+    // get properties from data
+    String datetime = data['datetime'];
+    String offset = data['utc_offset'].substring(1,3);
+    //print(datetime);
+    //print(offset);
+
+    // create Datetime object
+    DateTime now = DateTime.parse(datetime);
+    now.add(Duration(hours: int.parse(offset)));
+    print(now);
+
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
+    getTime();
   }
 
   @override
