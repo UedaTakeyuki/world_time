@@ -21,7 +21,7 @@ class WorldTime {
       //print(data);
 
       // get properties from data
-      String datetime = data['datetime'];
+      String datetime = data['utc_datetime'];
       String offset = data['utc_offset'].substring(1,3);
       //print(datetime);
       //print(offset);
@@ -33,6 +33,7 @@ class WorldTime {
       // set time property
       isDayTime = now.hour > 6 && now.hour < 20;
       time = DateFormat.jm().format(now);
+
     }
     catch (e) {
       print('caught error: $e');
